@@ -3,14 +3,14 @@
     <html lang ="fr">
         <head>
             <meta charset = "utf-8">
-            <link rel ="stylesheet" href="css/style_projet.css"/>
+            <link rel ="stylesheet" href="../assets/css/style_projet.css"/>
         </head>
         <body>
             <?php
-                include_once('ptut_navbar.php');
+                include_once('../views/v_ptut_navbar.php');
             ?>
             <div id ="form_register_connec">
-                <form action="ptut_verif.php"  method="POST">
+                <form action="../ptut_verif.php"  method="POST">
                     <h1>Connexion</h1>
 
                     <label><b>Nom d'utilisateur</b></label>
@@ -20,7 +20,7 @@
                     <input type="password" placeholder="Entrez le mot de passe" name ="password" required>
 
                     <input type="submit" id='submit' value="Se connecter">
-                    <a href="ptut_user_register.php">Pas inscrit ? Inscrivez-vous !</a>
+                    <a href="../views/v_ptut_user_register.php">Pas inscrit ? Inscrivez-vous !</a>
 
                     <?php
                         if(isset($_GET['erreur'])) {

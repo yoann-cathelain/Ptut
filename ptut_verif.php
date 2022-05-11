@@ -17,17 +17,17 @@
 
             if($count == 1) {
                 $_SESSION['username'] = $username;
-                header('Location: ptut_user_connecter.php');
+                header('Location: views/v_ptut_user_connecter.php');
             }else {
-                header('Location: ptut_user_connexion.php?erreur=1');
+                header('Location: /views/v_ptut_user_connexion.php?erreur=1');
             }
         }else {
-            header('Location: ptut_user_connexion.php?erreur=2');
+            header('Location: views/v_ptut_user_connexion.php?erreur=2');
             
         }
 
     }else {
-        header('Location: ptut_user_connexion.php');
+        header('Location: views/v_ptut_user_connexion.php');
     }
     mysqli_close($db);
 ?>

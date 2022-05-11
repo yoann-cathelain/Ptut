@@ -3,14 +3,14 @@
     <html lang ="fr">
         <head>
             <meta charset = "utf-8">
-            <link rel ="stylesheet" href="css/style_projet.css"/>
+            <link rel ="stylesheet" href="../assets/css/style_projet.css"/>
         </head>
         <?php
-                include_once('ptut_navbar.php');
+                include_once('../views/v_ptut_navbar.php');
             ?>
         <body>
             <div id ="form_register_connec">
-                <form action="ptut_register.php"  method="POST">
+                <form action="../ptut_register.php"  method="POST">
                     <h1>Inscription</h1>
 
                     <label><b>Nom d'utilisateur</b></label>
@@ -23,7 +23,7 @@
                     <input type="email"  placeholder="Entrez l'e-mail" name ="email" required>
 
                     <input type="submit" id='submit' value="S'inscrire">
-                    <a href="ptut_user_connexion.php">Déjà inscrit ? Connectez vous !</a>
+                    <a href="../views/v_ptut_user_connexion.php">Déjà inscrit ? Connectez vous !</a>
                     
                     <?php
                         if(isset($_GET['valider'])){

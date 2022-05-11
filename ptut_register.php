@@ -17,16 +17,16 @@
                 if($count == 0) {
                     $requete_insert = "INSERT INTO user (username,password,email)  VALUES ('".$username."','".$password."','".$email."') ";
                     $exec_requete_insert = mysqli_query($db,$requete_insert);
-                    header("Location: ptut_user_register.php?valider=1");
+                    header("Location: views/v_ptut_user_register.php?valider=1");
                 }else {
-                    header("Location: ptut_user_register.php?erreur=1");
+                    header("Location: views/v_ptut_user_register.php?erreur=1");
                 }
             }else {
-                header("Location: ptut_user_register.php?erreur=2");
+                header("Location: views/v_ptut_user_register.php?erreur=2");
             }
             
         }else {
-            header("Location: ptut_user_register.php");
+            header("Location: views/v_ptut_user_register.php");
         }
         mysqli_close($db);
     ?>
