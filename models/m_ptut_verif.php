@@ -6,7 +6,7 @@
         $password = $_POST['password'];
     }
         try {
-            $requeteConnection = "SELECT * FROM user WHERE username = '".$username."' AND password = '".$password."'  ";
+            $requeteConnection = "SELECT * FROM clients WHERE NOM = '".$username."' AND MOT_DE_PASSE = '".$password."'  ";
             
             $queryConnection = $db->query($requeteConnection);;
 

@@ -14,7 +14,7 @@
                     <?php
                         foreach($resultCat as $cat) {
                                 ?>
-                                    <option value="<?=$cat['id_cat']?>"><?=$cat['nom_cat']?></option>
+                                    <option value="<?=$cat['ID_CAT']?>"><?=$cat['NOM_CAT']?></option>
                                 <?php
                             }
 
@@ -27,13 +27,13 @@
                     <option value="0">Toutes les sous catégories</option>
                     <?php
                         foreach($resultSousCat as $sousCat) {
-                            if(isset($_GET['categorie']) && $_GET['sous_categorie'] == $sousCat["id_sous_cat"]){
+                            if(isset($_GET['categorie']) && $_GET['sous_categorie'] == $sousCat["ID_SOUSCAT"]){
                                 ?>
-                                <option value="<?=$sousCat['id_sous_cat']?>" selected="true"><?=$sousCat['nom_sous_cat']?></option>
+                                <option value="<?=$sousCat['ID_SOUSCAT']?>" selected="true"><?=$sousCat['NOM_SOUSCAT']?></option>
                                 <?php
                             }else {
                                 ?>
-                                <option value="<?=$sousCat['id_sous_cat']?>"><?=$sousCat['nom_sous_cat']?></option>
+                                <option value="<?=$sousCat['ID_SOUSCAT']?>"><?=$sousCat['NOM_SOUSCAT']?></option>
                                 <?php
                             }
                         }
@@ -54,10 +54,12 @@
                     <?php foreach($resultArticle as $Article){
                         ?>
                         <tr>
-                            <td><?=$Article['id_prod']?></td>
-                            <td><?=$Article['nom_produit']?></td>
-                            <td><?=$Article['est_disponible']?></td>
-                            <td><?=$Article['stock']?></td>
+                            <td><?=$Article['ID_PRODUIT']?></td>
+                            <td><?=$Article['NOM_PRODUIT']?></td>
+                            <td><?=$Article['DESCRIPTION']?></td>
+                            <td><?=$Article['PRIX']?></td>
+                            <td><?=$Article['PROMO']?></td> 
+                            <td><?=$Article['STOCK']?></td> 
                         </tr>
 
                         <?php

@@ -23,7 +23,7 @@
                     <input type="email"  placeholder="Entrez l'e-mail" name ="email" required>
 
                     <input type="submit" id='submit' value="S'inscrire">
-                    <a href="../views/v_ptut_user_connexion.php">Déjà inscrit ? Connectez vous !</a>
+                    <a href="v_ptut_user_connexion.php">Déjà inscrit ? Connectez vous !</a>
                     
                     <?php
                         if(isset($_GET['valider'])){

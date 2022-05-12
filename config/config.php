@@ -5,7 +5,7 @@
 
     //Connexion base de donnée
     const BD_HOST = 'localhost';
-    const BD_NAME = 'ptut';
+    const BD_NAME = 'ptut_test';
     const BD_USER = 'root';
     const BD_PWD = '';
 
