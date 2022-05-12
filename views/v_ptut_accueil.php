@@ -1,7 +1,3 @@
-<?php
-    include_once('../ptut_db_connexion.php');
-?>
-
 <!DOCTYPE HTML>
     <html lang = "fr">
         <meta charset="UTF-8">

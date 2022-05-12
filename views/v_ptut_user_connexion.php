@@ -10,7 +10,7 @@
                 include_once('../views/v_ptut_navbar.php');
             ?>
             <div id ="form_register_connec">
-                <form action="../ptut_verif.php"  method="POST">
+                <form action="../controller/c_ptut_verif.php"  method="POST">
                     <h1>Connexion</h1>
 
                     <label><b>Nom d'utilisateur</b></label>

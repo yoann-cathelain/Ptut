@@ -1,5 +1,4 @@
 <?php
-    include_once('../ptut_db_connexion.php');
     session_start();
     $_SESSION['username'] ="";
     $url_retour = "../views/v_ptut_accueil.php";

@@ -2,14 +2,13 @@
 <html lang="fr">
     <meta charset="utf-8">
     <link rel ="stylesheet" href="../assets/css/style_projet.css"/>
-    <link rel="icon" href="../ressources/aeki_logo.ico">
     <body>
     <header>
         <div class = "menu">
             <nav>
                 <a href="../views/v_ptut_accueil.php"><h1>AEKI</h1></a>
             <nav>
-                <a href="v_ptut_user_catalogue.php">Produits</a>
+                <a href="../views/v_ptut_user_catalogue.php">Produits</a>
                 <a href="#">A propos</a>
                 
             </nav>

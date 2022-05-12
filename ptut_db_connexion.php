@@ -1,8 +1,14 @@
 <?php
-    $db = mysqli_connect('localhost','root','','ptut');
-    if($db->connect_error){
-        die("Connection failed". $db->connect_error);
+    try {
+    $db = new PDO('mysql:host=localhost;dbname=ptut','root','');
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    }catch(PDOException $e){
+        if(TEST){
+            die('Erreur: ' .$e->getMessage());
+        }
+        $erreur = 'connexion';
     }
+
 ?>
 
 

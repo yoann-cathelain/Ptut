@@ -10,7 +10,7 @@
             ?>
         <body>
             <div id ="form_register_connec">
-                <form action="../ptut_register.php"  method="POST">
+                <form action="../controller/c_ptut_register.php"  method="POST">
                     <h1>Inscription</h1>
 
                     <label><b>Nom d'utilisateur</b></label>
