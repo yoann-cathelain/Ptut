@@ -43,13 +43,16 @@
             </form>
             <table align="center" border="1px" style="width: 600px; line-height:40px;">
                 <tr>
-                    <th colspan="4"><h2>Ensemble des Produits</h2></th>
+                    <th colspan="7"><h2>Ensemble des Produits</h2></th>
                 </tr>
                 <t>
                         <th>ID</th>
                         <th>NOM PRODUIT</th>
                         <th>DISPONIBLE</th>
+                        <th>PRIX</th>
+                        <th>PROMO</th>
                         <th>STOCK</th>
+
 
                     <?php foreach($resultArticle as $Article){
                         ?>
