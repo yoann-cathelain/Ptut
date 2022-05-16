@@ -1,5 +1,6 @@
 package presentation;
 
+import dao.Categories;
 import dao.Produit;
 import dao.ProduitDAO;
 import metier.ProduitMetier;
@@ -42,6 +43,19 @@ public class Program {
         for(Produit p : liste) {
             System.out.println(p.getIdProduit() + "\t" +p.getNomProduit() + "\t\t" + p.getPrix() + "\t" + p.getDescription() + "\t\t" + p.getStock() + "\t" + p.getCat() + "\t\t" + p.getSousCat());
         }
+        
+        List<String> categ = Categories.getCategory();
+        
+        for (String s : categ) {
+        	System.out.println(s);
+        }
+        
+        List<String> sousCateg = Categories.getSousCateg("chaises");
+        
+        for (String s : sousCateg) {
+        	System.out.println(s);
+        }
+        
     }
 }
 
