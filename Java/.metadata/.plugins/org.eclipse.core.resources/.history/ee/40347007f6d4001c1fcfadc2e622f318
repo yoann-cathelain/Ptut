@@ -1,0 +1,26 @@
+package dao;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.mysql.jdbc.Connection;
+
+public class Categories {
+	
+	public static List<String> getCategory(){
+        Connection connection;
+        String url = "jdbc:mysql://localhost:3306/bdd";
+        try {
+        	connection = (Connection) DriverManager.getConnection(url,"root","");
+        	System.out.println("Connecte avec succes");	
+        }catch(SQLException e) { System.out.println(e); }
+       
+        String sql = ;
+		
+		return null;
+	}
+	
+	
+	
+}
