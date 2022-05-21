@@ -1,9 +1,8 @@
 package presentation;
 
-import dao.Categories;
-import dao.Produit;
-import dao.ProduitDAO;
-import metier.ProduitMetier;
+import gestioncatalogue.dao.Produit;
+import gestioncatalogue.dao.ProduitDAO;
+import gestioncatalogue.metier.ProduitMetier;
 import java.util.List;
 /**
  *
@@ -38,24 +37,11 @@ public class Program {
         pmet.deleteProduit(6);
         
         List<Produit> liste = pmet.getProduits();
-        System.out.println("Id\tNom\t\tPrix\tDescription\t\t\tStock\tCategorie\tSous-categorie");
+        System.out.println("Id\tNom\t\t\t\tPrix\tDescription\t\t\tStock\tCategorie\tSous-categorie");
         System.out.println("-----------------------------------------------------------------------------------------------");
         for(Produit p : liste) {
-            System.out.println(p.getIdProduit() + "\t" +p.getNomProduit() + "\t\t" + p.getPrix() + "\t" + p.getDescription() + "\t\t" + p.getStock() + "\t" + p.getCat() + "\t\t" + p.getSousCat());
+            System.out.println(p.getIdProduit() + "\t" +p.getNomProduit() + "\t\t\t" + p.getPrix() + "\t" + p.getDescription() + "\t\t" + p.getStock() + "\t" + p.getCat() + "\t\t" + p.getSousCat());
         }
-        
-        List<String> categ = Categories.getCategory();
-        
-        for (String s : categ) {
-        	System.out.println(s);
-        }
-        
-        List<String> sousCateg = Categories.getSousCateg("chaises");
-        
-        for (String s : sousCateg) {
-        	System.out.println(s);
-        }
-        
     }
 }
 
