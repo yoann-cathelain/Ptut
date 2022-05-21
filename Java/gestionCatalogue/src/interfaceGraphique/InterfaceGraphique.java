@@ -105,11 +105,11 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         r_lbl_nom_produit.setText("Nom produit");
         r_lbl_nom_produit.setToolTipText("");
 
-        r_lbl_categorie.setText("CatÃ©gories");
+        r_lbl_categorie.setText("Catégories");
 
         r_cbb_categorie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        r_lbl_sous_cat.setText("Sous-catÃ©gorie");
+        r_lbl_sous_cat.setText("Sous-catégorie");
 
         r_cbb_sous_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -174,13 +174,13 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ams_tf_id_produit.setMinimumSize(new java.awt.Dimension(30, 22));
         ams_tf_id_produit.setPreferredSize(new java.awt.Dimension(30, 22));
 
-        ams_p_lbl_categorie.setText("CatÃ©gories");
+        ams_p_lbl_categorie.setText("Catégories");
 
         ams_cbb_categorie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ams_cbb_categorie.setMinimumSize(new java.awt.Dimension(52, 22));
         ams_cbb_categorie.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        ams_p_lbl_sous_cat.setText("Sous-catÃ©gorie");
+        ams_p_lbl_sous_cat.setText("Sous-catégorie");
 
         ams_cbb_sous_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ams_cbb_sous_cat.setMaximumSize(new java.awt.Dimension(60, 22));
@@ -201,7 +201,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
         ams_lbl_en_promotion.setText("En promotion");
 
-        ams_lbl_prix_reduit.setText("Prix rÃ©duit");
+        ams_lbl_prix_reduit.setText("Prix réduit");
 
         ams_tf_prix_reduit.setPreferredSize(new java.awt.Dimension(80, 22));
         ams_tf_prix_reduit.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +210,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
             }
         });
 
-        ams_lbl_stock.setText("QuantitÃ© en stock");
+        ams_lbl_stock.setText("Quantité en stock");
 
         ams_tf_stock.setPreferredSize(new java.awt.Dimension(80, 22));
 
@@ -347,9 +347,9 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
         tpanel_onglets.addTab("Produits", produits);
 
-        panel_c_ajout.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ajouter une catÃ©gorie"));
+        panel_c_ajout.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ajouter une catégorie"));
 
-        a_c_lbl_nom_cat.setText("Nom catÃ©gorie");
+        a_c_lbl_nom_cat.setText("Nom catégorie");
 
         a_c_btn_ajouter_cat.setText("Ajouter");
 
@@ -377,16 +377,16 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        panel_c_modif_suppr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Modifier - Supprimer une catÃ©gorie"));
+        panel_c_modif_suppr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Modifier - Supprimer une catégorie"));
         panel_c_modif_suppr.setPreferredSize(new java.awt.Dimension(823, 66));
 
-        ms_c_lbl_categorie.setText("CatÃ©gories");
+        ms_c_lbl_categorie.setText("Catégories");
 
         ms_c_cbb_categorie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ms_c_cbb_categorie.setMinimumSize(new java.awt.Dimension(52, 22));
         ms_c_cbb_categorie.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        ms_c_lbl_nom_cat.setText("Nom catÃ©gorie");
+        ms_c_lbl_nom_cat.setText("Nom catégorie");
 
         ms_c_btn_modifier_cat.setText("Modifier");
 
@@ -431,16 +431,16 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        panel_sc_ajout.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ajouter une sous-catÃ©gorie"));
+        panel_sc_ajout.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ajouter une sous-catégorie"));
         panel_sc_ajout.setPreferredSize(new java.awt.Dimension(468, 66));
 
-        a_sc_lbl_cat.setText("CatÃ©gories");
+        a_sc_lbl_cat.setText("Catégories");
 
         a_sc_cbb_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         a_sc_cbb_cat.setMinimumSize(new java.awt.Dimension(52, 22));
         a_sc_cbb_cat.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        a_sc_lbl_nom_sous_cat.setText("Nom sous-catÃ©gorie");
+        a_sc_lbl_nom_sous_cat.setText("Nom sous-catégorie");
 
         a_sc_btn_ajouter_sous_cat.setText("Ajouter");
 
@@ -475,22 +475,22 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        panel_sc_modif_suppr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Modifier - Supprimer une sous-catÃ©gorie"));
+        panel_sc_modif_suppr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Modifier - Supprimer une sous-catégorie"));
 
-        ms_sc_lbl_cat.setText("CatÃ©gories");
+        ms_sc_lbl_cat.setText("Catégories");
 
         ms_sc_cbb_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ms_sc_cbb_cat.setMinimumSize(new java.awt.Dimension(52, 22));
         ms_sc_cbb_cat.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        ms_sc_lbl_sous_cat.setText("Sous-catÃ©gorie");
+        ms_sc_lbl_sous_cat.setText("Sous-catégorie");
 
         ms_sc_cbb_sous_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ms_sc_cbb_sous_cat.setMaximumSize(new java.awt.Dimension(60, 22));
         ms_sc_cbb_sous_cat.setMinimumSize(new java.awt.Dimension(52, 22));
         ms_sc_cbb_sous_cat.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        ms_sc_lbl_nom_sous_cat1.setText("Nom sous-catÃ©gorie");
+        ms_sc_lbl_nom_sous_cat1.setText("Nom sous-catégorie");
 
         ms_sc_btn_modifier_sous_cat.setText("Modifier");
 
@@ -564,7 +564,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                 .addContainerGap(100, Short.MAX_VALUE))
         );
 
-        tpanel_onglets.addTab("CatÃ©gories", categories);
+        tpanel_onglets.addTab("Catégories", categories);
 
         javax.swing.GroupLayout promotionsLayout = new javax.swing.GroupLayout(promotions);
         promotions.setLayout(promotionsLayout);
@@ -615,7 +615,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
         fichier.setText("Fichier");
 
-        gestionCaracteristiques.setText("Gestion CaractÃ©ristiques");
+        gestionCaracteristiques.setText("Gestion Caractéristiques");
         fichier.add(gestionCaracteristiques);
 
         gestionPromotions.setText("Gestion Promotions");
