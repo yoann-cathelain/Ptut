@@ -26,7 +26,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         r_lbl_nom_produit = new javax.swing.JLabel();
         r_tf_nom_produit = new javax.swing.JTextField();
         r_lbl_categorie = new javax.swing.JLabel();
-        r_cbb_categorie = new javax.swing.JComboBox<>();
+        javax.swing.JComboBox<String> r_cbb_categorie = new javax.swing.JComboBox<>();
         r_lbl_sous_cat = new javax.swing.JLabel();
         r_cbb_sous_cat = new javax.swing.JComboBox<>();
         r_btn_rechercher = new javax.swing.JButton();
@@ -107,7 +107,12 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
         r_lbl_categorie.setText("Catégories");
 
-        r_cbb_categorie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        r_cbb_categorie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2", "Item3", "Item4" }));
+        r_cbb_categorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r_cbb_categorieActionPerformed(evt);
+            }
+        });
 
         r_lbl_sous_cat.setText("Sous-catégorie");
 
@@ -420,14 +425,15 @@ public class InterfaceGraphique extends javax.swing.JFrame {
             panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_c_modif_supprLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ms_c_lbl_categorie)
-                    .addComponent(ms_c_cbb_categorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ms_c_lbl_nom_cat)
                         .addComponent(ms_c_tf_nom_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ms_c_btn_modifier_cat)
-                        .addComponent(ms_c_btn_supprimer_cat)))
+                        .addComponent(ms_c_btn_supprimer_cat))
+                    .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ms_c_lbl_categorie)
+                        .addComponent(ms_c_cbb_categorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -465,13 +471,14 @@ public class InterfaceGraphique extends javax.swing.JFrame {
             panel_sc_ajoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_sc_ajoutLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(panel_sc_ajoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(a_sc_lbl_cat)
-                    .addComponent(a_sc_cbb_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_sc_ajoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_sc_ajoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(a_sc_lbl_nom_sous_cat)
                         .addComponent(a_sc_tf_nom_sous_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(a_sc_btn_ajouter_sous_cat)))
+                        .addComponent(a_sc_btn_ajouter_sous_cat))
+                    .addGroup(panel_sc_ajoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(a_sc_lbl_cat)
+                        .addComponent(a_sc_cbb_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -532,12 +539,13 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     .addComponent(ms_sc_cbb_sous_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ms_sc_lbl_sous_cat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_sc_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ms_sc_lbl_nom_sous_cat1)
-                    .addComponent(ms_sc_tf_nom_sous_cat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_sc_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_sc_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ms_sc_btn_supprimer_sous_cat)
-                        .addComponent(ms_sc_btn_modifier_sous_cat)))
+                        .addComponent(ms_sc_btn_modifier_sous_cat))
+                    .addGroup(panel_sc_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ms_sc_lbl_nom_sous_cat1)
+                        .addComponent(ms_sc_tf_nom_sous_cat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -657,6 +665,10 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ms_c_btn_supprimer_catActionPerformed
 
+    private void r_cbb_categorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_cbb_categorieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_r_cbb_categorieActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -681,7 +693,6 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarreMenu;
     private javax.swing.JMenu aPropos;
-    private javax.swing.JButton a_btn_ajouter_categorie3;
     private javax.swing.JButton a_c_btn_ajouter_cat;
     private javax.swing.JLabel a_c_lbl_nom_cat;
     private javax.swing.JTextField a_c_tf_nom_cat;
@@ -695,37 +706,23 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private javax.swing.JButton ams_btn_supprimer_produit;
     private javax.swing.ButtonGroup ams_btngrp_en_promotion;
     private javax.swing.JComboBox<String> ams_cbb_categorie;
-    private javax.swing.JComboBox<String> ams_cbb_categorie4;
     private javax.swing.JComboBox<String> ams_cbb_sous_cat;
-    private javax.swing.JComboBox<String> ams_cbb_sous_cat4;
-    private javax.swing.JLabel ams_lbl_categorie4;
     private javax.swing.JLabel ams_lbl_description;
-    private javax.swing.JLabel ams_lbl_description4;
     private javax.swing.JLabel ams_lbl_en_promotion;
-    private javax.swing.JLabel ams_lbl_en_promotion4;
-    private javax.swing.JLabel ams_lbl_id_cat3;
     private javax.swing.JLabel ams_lbl_id_produit;
-    private javax.swing.JLabel ams_lbl_nom_cat3;
     private javax.swing.JLabel ams_lbl_nom_produit;
     private javax.swing.JLabel ams_lbl_prix;
-    private javax.swing.JLabel ams_lbl_prix4;
     private javax.swing.JLabel ams_lbl_prix_reduit;
-    private javax.swing.JLabel ams_lbl_prix_reduit4;
-    private javax.swing.JLabel ams_lbl_sous_cat4;
     private javax.swing.JLabel ams_lbl_stock;
-    private javax.swing.JLabel ams_lbl_stock4;
     private javax.swing.JLabel ams_p_lbl_categorie;
     private javax.swing.JLabel ams_p_lbl_sous_cat;
     private javax.swing.JRadioButton ams_rdobtn_non;
     private javax.swing.JRadioButton ams_rdobtn_oui;
     private javax.swing.JScrollPane ams_scroll_description;
     private javax.swing.JTextArea ams_ta_description;
-    private javax.swing.JTextField ams_tf_id_cat3;
     private javax.swing.JTextField ams_tf_id_produit;
-    private javax.swing.JTextField ams_tf_nom_cat3;
     private javax.swing.JTextField ams_tf_nom_produiit;
     private javax.swing.JTextField ams_tf_prix;
-    private javax.swing.JTextField ams_tf_prix4;
     private javax.swing.JTextField ams_tf_prix_reduit;
     private javax.swing.JTextField ams_tf_stock;
     private javax.swing.JPanel categories;
@@ -735,8 +732,6 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private javax.swing.JMenuItem gestionCaracteristiques;
     private javax.swing.JMenuItem gestionClients;
     private javax.swing.JMenuItem gestionPromotions;
-    private javax.swing.JButton ms_btn_modifier_categorie3;
-    private javax.swing.JButton ms_btn_supprimer_categorie3;
     private javax.swing.JButton ms_c_btn_modifier_cat;
     private javax.swing.JButton ms_c_btn_supprimer_cat;
     private javax.swing.JComboBox<String> ms_c_cbb_categorie;
@@ -752,7 +747,6 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private javax.swing.JLabel ms_sc_lbl_sous_cat;
     private javax.swing.JTextField ms_sc_tf_nom_sous_cat1;
     private javax.swing.JPanel panel_c_ajout;
-    private javax.swing.JPanel panel_c_ajout_modif_suppr3;
     private javax.swing.JPanel panel_c_modif_suppr;
     private javax.swing.JPanel panel_general;
     private javax.swing.JPanel panel_p_ajout_modif_suppr;
@@ -764,7 +758,6 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private javax.swing.JMenuItem quitter;
     private javax.swing.JButton r_btn_effacer;
     private javax.swing.JButton r_btn_rechercher;
-    private javax.swing.JComboBox<String> r_cbb_categorie;
     private javax.swing.JComboBox<String> r_cbb_sous_cat;
     private javax.swing.JLabel r_lbl_categorie;
     private javax.swing.JLabel r_lbl_nom_produit;

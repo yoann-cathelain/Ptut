@@ -22,6 +22,7 @@
             <?php
         }
         ?>    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 </select>
                 <select name="sous_categorie" id="selectSousCat" >
                     <option value="0">Toutes les sous catégories</option>
@@ -54,7 +55,8 @@
                         <th>STOCK</th>
 
 
-                    <?php foreach($resultArticle as $Article){
+                    <?php if(isset($_POST['categorie']) && isset($_POST['sous_categorie'])){
+                        foreach($resultArticle as $Article){
                         ?>
                         <tr>
                             <td><?=$Article['ID_PRODUIT']?></td>
@@ -67,7 +69,22 @@
 
                         <?php
                     }
+                }else {
+                    foreach($resultProduit as $Produit){
+
                     ?>
+                    <tr>
+                        <td><?=$Produit['ID_PRODUIT']?></td>
+                        <td><?=$Produit['NOM_PRODUIT']?></td>
+                        <td><?=$Produit['DESCRIPTION']?></td>
+                        <td><?=$Produit['PRIX']?></td>
+                        <td><?=$Produit['PROMO']?></td>
+                        <td><?=$Produit['STOCK']?></td>
+                    </tr>
+                    <?php
+                    }
+                }
+                ?>
             </t>
             </table>
         </body>

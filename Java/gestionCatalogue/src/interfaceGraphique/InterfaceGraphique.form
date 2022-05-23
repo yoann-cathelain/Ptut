@@ -249,15 +249,20 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
+                            <StringItem index="0" value="Item1"/>
+                            <StringItem index="1" value="Item2"/>
+                            <StringItem index="2" value="Item3"/>
+                            <StringItem index="3" value="Item4"/>
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="r_cbb_categorieActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="r_lbl_sous_cat">
@@ -737,14 +742,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ms_c_lbl_categorie" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ms_c_cbb_categorie" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="ms_c_lbl_nom_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="ms_c_tf_nom_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="ms_c_btn_modifier_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="ms_c_btn_supprimer_cat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ms_c_lbl_categorie" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ms_c_cbb_categorie" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="14" max="32767" attributes="0"/>
@@ -839,13 +846,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="a_sc_lbl_cat" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="a_sc_cbb_cat" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="a_sc_lbl_nom_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="a_sc_tf_nom_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="a_sc_btn_ajouter_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="a_sc_lbl_cat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="a_sc_cbb_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="14" max="32767" attributes="0"/>
@@ -948,12 +957,14 @@
                                   <Component id="ms_sc_lbl_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ms_sc_lbl_nom_sous_cat1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ms_sc_tf_nom_sous_cat1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="ms_sc_btn_supprimer_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="ms_sc_btn_modifier_sous_cat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="ms_sc_lbl_nom_sous_cat1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ms_sc_tf_nom_sous_cat1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="12" max="32767" attributes="0"/>
