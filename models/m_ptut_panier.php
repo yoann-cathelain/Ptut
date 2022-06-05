@@ -1,11 +1,23 @@
 <?php
     include_once('../ptut_db_connexion.php');
+    if(isset($_SESSION)){
+        session_start();
+    }
+        $queryClients = $db->prepare("SELECT ID_CLIENT FROM clients WHERE NOM = ?");
+        $queryClients->execute(["sa"]);
 
-    if(isset($_GET['id'])){
-        $query = $db->prepare("SELECT * FROM produits WHERE ID_PRODUIT = ?");
-        $query->execute([$_GET['id']]);
+        $client = $queryClients->fetchAll(PDO::FETCH_ASSOC);
 
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-    }else if(empty($_GET['id'])){}
+        $ArticlePanier = $db->prepare("SELECT * FROM ligne_panier JOIN produits ON ligne_panier.ID_PRODUIT = produits.ID_PRODUIT JOIN panier ON ligne_panier.ID_PANIER = panier.ID_PANIER WHERE ID_CLIENT = ?");
+        $ArticlePanier->execute([$client[0]['ID_CLIENT']]);
 
+        $Articles = $ArticlePanier->fetchAll(PDO::FETCH_ASSOC);
+
+        creationPanier($client[0]['ID_CLIENT'],$db);
+
+        $queryPanier = $db->prepare("SELECT * FROM panier WHERE ID_CLIENT = ?");
+        $queryPanier->execute([$client[0]['ID_CLIENT']]);
+
+        $panier = $queryPanier->fetchAll(PDO::FETCH_ASSOC);
+        $nbArticles = compterArticle($db,$panier[0]['ID_PANIER']);
 ?>

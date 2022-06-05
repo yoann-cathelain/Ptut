@@ -1,3 +1,17 @@
+<?php
+    session_start();
+?>    
+    <link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/aeki_favicon.png">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+
 <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
@@ -24,7 +38,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="../index.php">
                 <img src="../assets/img/aeki_logo_resize.png">
             </a>
 
@@ -39,13 +53,13 @@
                             <a class="nav-link" href="../index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">A propos</a>
+                            <a class="nav-link" href="../view/v_ptut_a_propos.php">A propos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../view/v_ptut_catalogue.php">Produits</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="../view/v_ptut_contact.php">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -61,13 +75,51 @@
                     <a class="nav-icon d-none d-lg-inline" href="" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="../view/v_ptut_panier.php">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <?php
+                            if(!empty($nbArticles)){
+                                ?>
+                                <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"><?=$nbArticles?></span>
+                                <?php
+                            }
+                            ?>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="v_ptut_connexion_inscription.php">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                    </a>
+                    <?php
+                    if(empty($_SESSION['username'])){
+                        $_SESSION['username'] ="";
+                    }
+                    if(isset($_SESSION['username'])){
+                        if($_SESSION['username'] == ""){
+                            ?>
+                            <a class="nav-icon position-relative text-decoration-none" href="../view/v_ptut_connexion.php">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    <?php  
+                        if(isset($_SESSION['username'])){
+                                if($_SESSION['username'] != ""){
+                                    $user = $_SESSION['username']
+
+                                    ?>
+                                    <div class="flex-fill">
+                                        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href=""><?=$user?></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="../view/v_ptut_deconnexion.php">Se déconnecter</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php
+                                }
+                        }
+                            ?>
+
                 </div>
             </div>
 

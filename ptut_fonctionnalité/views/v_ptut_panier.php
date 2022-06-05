@@ -11,10 +11,7 @@
     </head>
     <body>
         <?php
-            if(isset($_SESSION['username']) && $_SESSION['username'] == ''){
-                header('Location: ../views/v_ptut_user_connexion.php');
-            }else {
-                ?>
+        ?>
                 <form method="POST" action="v_ptut_panier.php">
                 <table style="width: 400px">
                     <tr>
@@ -58,8 +55,5 @@
                 </table>
                 <input type="submit" value="Valider la commande">
             </form>
-            <?php
-            }
-            ?>
     </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    include_once('ptut_db_connexion.php');
+    include_once('../ptut_db_connexion.php');
 
     try {
         $requeteUsername = "SELECT * FROM clients WHERE NOM ='".$username."' ";
@@ -15,8 +15,5 @@
         $resultEmail = $queryEmail->fetchall(PDO::FETCH_ASSOC);
         
     }catch(PDOException $e){
-        if(TEST){
-            die('Erreur'.$e->getMessage());
-        }
-        $erreur = 'query';
+        echo "Erreur".$e->getMessage();
     }

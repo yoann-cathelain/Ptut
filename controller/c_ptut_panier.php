@@ -1,24 +1,18 @@
 <?php
     include_once('../models/m_ptut_panier.php');
 
-    if(isset($_GET['id'])){
-        ajouterUnArticle($results[0]['NOM_PRODUIT'],count($results),$results[0]['PRIX']);
-    }
-    $action = empty($_GET['action']) ? 'suppression' : $_GET['action'];
+    if(isset($_GET['id_produit'])){
+            ajoutArticle($db,$panier[0]['ID_PANIER'],$_GET['id_produit'],1);
+            header("Location: ../view/v_ptut_panier.php");
 
-    if($action == 'suppression') {
-        if($_SESSION['panier'] && isset($_GET['nom'])){
-            supprimerArticle($_GET['nom']);
-        }
-    }else if($action == 'ajout'){
-        if($_SESSION['panier'] && isset($_GET['nom'])){
-            $queryAjout = $db->prepare("SELECT * FROM produits WHERE NOM_PRODUIT = ?");
-            $queryAjout->execute([$_GET['nom']]);
+    }else if(isset($_GET['action'])){
+        $action = $_GET['action'];
 
-            $ajout = $queryAjout->fetchAll(PDO::FETCH_ASSOC);
-
-            ajouterUnArticle($ajout[0]['NOM_PRODUIT'],count($ajout),$ajout[0]['PRIX']);
+        if($action == "supprimer") {
+                supprimerArticle($db,$_GET['id']);
+                header("Location: ../view/v_ptut_panier.php");
         }
     }
+
 
     

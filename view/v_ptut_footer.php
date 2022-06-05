@@ -8,7 +8,7 @@
                         <ul class="list-unstyled text-light footer-link-list">
                             <li>
                                 <i class="fas fa-map-marker-alt fa-fw"></i>
-                                123 Consectetur at ligula 10660
+                                92 Bd Niels Bohr, 69100 Villeurbanne
                             </li>
                             <li>
                                 <i class="fa fa-phone fa-fw"></i>
@@ -16,7 +16,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-envelope fa-fw"></i>
-                                <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                                <a class="text-decoration-none" href="mailto:business@aeki.com">business@aeki.com</a>
                             </li>
                         </ul>
                     </div>
@@ -37,9 +37,9 @@
                     <div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                         <ul class="list-unstyled text-light footer-link-list">
-                            <li><a class="text-decoration-none" href="#">Home</a></li>
-                            <li><a class="text-decoration-none" href="#">About Us</a></li>
-                            <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                            <li><a class="text-decoration-none" href="#">Accueil</a></li>
+                            <li><a class="text-decoration-none" href="#">A propos</a></li>
+                            <li><a class="text-decoration-none" href="#">Localisation Magasin</a></li>
                             <li><a class="text-decoration-none" href="#">FAQs</a></li>
                             <li><a class="text-decoration-none" href="#">Contact</a></li>
                         </ul>
@@ -82,7 +82,7 @@
                     <div class="row pt-2">
                         <div class="col-12">
                             <p class="text-left text-light">
-                                Copyright &copy; 2021 Company Name 
+                                Copyright &copy; 2021 Aeki 
                                 | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
                             </p>
                         </div>

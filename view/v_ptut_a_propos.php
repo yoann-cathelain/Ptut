@@ -1,93 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <title>Aeki</title>
+    <title>Aeki - A propos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/aeki_favicon.png">
-
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
 </head>
+
 <body>
     <?php
-    include_once('../controller/c_ptut_catalogue.php');
-    include_once('../view/v_ptut_navbar.php');
+        include_once('v_ptut_navbar.php');
     ?>
-    
-
-
-    <!-- Start Content -->
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-9">
-                <form action="" method="GET">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="d-flex">
-                                <select class="form-control linked-select" name="categorie" id="Cat" data-target="#sousCat" data-source="../api/list.php?type=souscategories&filtre=$id">
-                                    <option value="">Séléctionnez une catégorie</option>
-                                    <?php
-                                    foreach($categories as $categorie){
-                                    ?>
-                                    <option value="<?=$categorie['ID_CAT']?>"><?=$categorie['NOM_CAT']?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 pb-4">
-                            <div class="d-flex">
-                                <select class="form-control" name="sous_categorie" id="sousCat">
-                                    <option value="">Selectionnez une sous catégorie</option>
-                                </select>
-                            </div>
-                        </div>
-                        <script src="../assets/js/s_catalogue.js"></script>
-                        <div class="col-md-4 pb-4">
-                            <div class="d-flex">
-                                <input type="submit" value="Valider">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="row">
-                    <?php
-                    foreach($resultArticle as $Article) {
-                        ?>
-                            <div class="col-md-4">
-                                <div class="card mb-4 product-wap rounded-0">
-                                    <div class="card rounded-0">
-                                        <img class="card-img rounded-0 img-fluid" src="<?=$Article['IMG']?>">
-                                        <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                            <ul class="list-unstyled">
-                                                <li><a class="btn btn-success text-white mt-2" href="../view/v_ptut_produits.php?id=<?=$Article['ID_PRODUIT']?>"><i class="far fa-eye"></i></a></li>
-                                                <li><a class="btn btn-success text-white mt-2" href="../view/v_ptut_panier.php?id_produit=<?=$Article['ID_PRODUIT']?>"><i class="fas fa-cart-plus"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <a href="../view/v_ptut_produits.php?id=<?=$Article['ID_PRODUIT']?>" class="h3 text-decoration-none"><?=$Article['NOM_PRODUIT']?></a>
-                                        <p class="text-center mb-0"><?=$Article['PRIX']?>€</p>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                </div>    
+    <section class="bg-success py-5">
+        <div class="container">
+            <div class="row align-items-center py-5">
+                <div class="col-md-8 text-white">
+                    <h1>Nos informations</h1>
+                    <p>
+                        Nos magasins sont prêt à tout pour vous satisfaire !
+                        Nous mettons tout en oeuvre, de l'expédition à la réception de votre produit,
+                        mais également à l'achat dans nos magasins.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img class ="img-svg"src="../assets/img/information_2.svg" alt="About Hero">
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Content -->
+    </section>
+    <!-- Close Banner -->
+
+    <!-- Start Section -->
+    <section class="container py-5">
+        <div class="row text-center pt-5 pb-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Nos services</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
+                    <h2 class="h5 mt-4 text-center">Service Livraison</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
+                    <h2 class="h5 mt-4 text-center">Expédition et retour</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
+                    <h2 class="h5 mt-4 text-center">Promotion</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
+                    <h2 class="h5 mt-4 text-center">Service 24/24 7/7</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section -->
 
     <!-- Start Brands -->
     <section class="bg-light py-5">
@@ -104,7 +86,7 @@
                     <div class="row d-flex flex-row">
                         <!--Controls-->
                         <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
+                            <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="prev">
                                 <i class="text-light fas fa-chevron-left"></i>
                             </a>
                         </div>
@@ -112,7 +94,7 @@
 
                         <!--Carousel Wrapper-->
                         <div class="col">
-                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
                                 <!--Slides-->
                                 <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -181,7 +163,7 @@
 
                         <!--Controls-->
                         <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
+                            <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="next">
                                 <i class="text-light fas fa-chevron-right"></i>
                             </a>
                         </div>
@@ -192,11 +174,12 @@
         </div>
     </section>
     <!--End Brands-->
+
+
     <?php
-        include_once('../view/v_ptut_footer.php');
+        include_once('v_ptut_footer.php');
     ?>
 
-    
     <!-- Start Script -->
     <script src="../assets/js/jquery-1.11.0.min.js"></script>
     <script src="../assets/js/jquery-migrate-1.2.1.min.js"></script>
