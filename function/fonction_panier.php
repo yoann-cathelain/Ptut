@@ -94,14 +94,12 @@
         $quantity = $quantiteProduit->fetchAll(PDO::FETCH_ASSOC);
         if(isset($quantity[0]['QUANTITE_PRODUIT']) && $action){
             if($action = "ajout"){
-                $plusquantity= $quantity[0]['QUANTITE_PRODUIT'] + 1;
-                $ajoutQuantite = $pdodb->prepare("UPDATE ligne_panier SET QUANTITE_PRODUIT = ? WHERE ID_PRODUIT = ? ");
-                $ajoutQuantite->execute([$plusquantity,$id_produit]);
+                $ajoutQuantite = $pdodb->prepare("UPDATE ligne_panier SET QUANTITE_PRODUIT = QUANTITE_PRODUIT+1 WHERE ID_PRODUIT = ? ");
+                $ajoutQuantite->execute([$id_produit]);
                 return true;
             }else if($action = "supprimer"){
-                $moinsquantity= $quantity[0]['QUANTITE_PRODUIT'] - 1;
-                $ajoutQuantite = $pdodb->prepare("UPDATE ligne_panier SET QUANTITE_PRODUIT = ? WHERE ID_PRODUIT = ? ");
-                $ajoutQuantite->execute([$moinsquantity,$id_produit]);
+                $ajoutQuantite = $pdodb->prepare("UPDATE ligne_panier SET QUANTITE_PRODUIT = QUANTITE_PRODUIT-1 WHERE ID_PRODUIT = ? ");
+                $ajoutQuantite->execute([$id_produit]);
                 return true;
             }else {
                 return false;
