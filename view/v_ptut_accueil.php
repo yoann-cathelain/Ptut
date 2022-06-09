@@ -93,7 +93,7 @@
                     <div class="col-12 col-md-4 p-5 mt-3">
                     <a href="#"><img src="<?=$month['IMG']?>" class="rounded-circle img-fluid border"></a>
                     <h5 class="text-center mt-3 mb-3"><?=$month['NOM_CAT']?></h5>
-                    <p class="text-center"><a href="../view/v_ptut_catalogue.php?categorie=<?=$month['ID_CAT']?>"class="btn btn-success">Go Shop</a></p>
+                    <p class="text-center"><a href="../view/v_ptut_catalogue.php?categorie=<?=$month['ID_CAT']?>&EnPromotion="class="btn btn-success">Go Shop</a></p>
                 </div>
                 <?php
                 }
