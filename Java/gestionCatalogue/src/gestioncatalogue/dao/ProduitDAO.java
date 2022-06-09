@@ -7,6 +7,7 @@ import static gestioncatalogue.dao.CategorieDAO.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -179,17 +180,18 @@ public class ProduitDAO {
         }
      
         // Rechercher un produit
-        public static Produit searchProduit(String recherche, String nom_cat, String nom_sousCat) {
+        public static List<Produit> searchProduits(String recherche, String nom_cat, String nom_sousCat) {
             // recupere 1 produit ou le nom existe et contient
             String sql = "select * from produits NATURAL JOIN produit_cat NATURAL JOIN categories NATURAL JOIN sous_categories WHERE nom_produit LIKE ? AND NOM_CAT = ? AND NOM_SOUSCAT = ?;";
             Produit searchProduct = null;
+            List<Produit> searchProducts = new ArrayList<>();
             try{
                 PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql);
                 pst.setString(1, "%" + recherche + "%");
                 pst.setString(2, nom_cat);
                 pst.setString(3, nom_sousCat);
                 ResultSet rs = pst.executeQuery();         
-                if((rs.next())) {
+                while(rs.next()) {
                     int id = rs.getInt("ID_PRODUIT");
                     String nom_produit = rs.getString("NOM_PRODUIT");
                     String description = rs.getString("DESCRIPTION");
@@ -200,14 +202,10 @@ public class ProduitDAO {
                     int stock = rs.getInt("STOCK");
                     String img = rs.getString("IMG");
                     searchProduct = new Produit(id, nom_produit, description, prix, en_promotion, promo, prix_reduit, stock, img, nom_cat, nom_sousCat);
-                }
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Il existe plusieurs produits pour votre recherche.\n"
-                            + "Si le produit affiché ne correspond pas au produit désiré, affinez le nom du produit recherché.",
-                            "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
+                    searchProducts.add(searchProduct);
                 }
             } catch (SQLException e) { System.out.println(e); }          
-            return searchProduct;
+            return searchProducts;
         }
 
         
