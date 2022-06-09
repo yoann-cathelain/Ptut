@@ -2,24 +2,29 @@
         require_once('../ptut_db_connexion.php');
         include_once('../models/m_ptut_register.php');
 
-        if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
-            $username = $_POST['username'];
+        if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm_password']) && isset($_POST['email'])){
+            $prenom = $_POST['prenom'];
+            $nom = $_POST['nom'];
             $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
             $email = $_POST['email'];
-            $countUsername = count($resultUsername);
-            $countPassword = count($resultPassword);
-            $countEmail = count($resultEmail);
 
-            if($countUsername == 0 && $countPassword == 0 && $countEmail == 0) { 
-                $register = "INSERT INTO clients (NOM,MOT_DE_PASSE,EMAIL) VALUES (?,?,?) ";
+            if($password == $confirm_password) { 
+                try{
+                $register = "INSERT INTO clients (PRENOM,NOM,MOT_DE_PASSE,EMAIL) VALUES (?,?,?,?) ";
                 $queryRegister = $db->prepare($register);
-                $queryRegister->execute(array($username,$password,$email));
-                header("Location: ../views/v_ptut_user_register.php?valider=1");
-            }else {
-                header("Location: ../views/v_ptut_user_register.php?erreur=1");
+                $queryRegister->execute(array($prenom,$nom,$password,$email));
+                header("Location: ../view/v_ptut_inscription.php?valider=1");
+                }catch(PDOException $e){
+                    if($e->getCode() == 23000){
+                        header("Location: ../view/v_ptut_inscription.php?erreur=1");
+                    }else {
+                        throw $e;
+                    }
+                }
             }
             
         }else {
-            header("Location: ../views/v_ptut_user_register.php?erreur=2");
+            header("Location: ../view/v_ptut_inscription.php?erreur=2");
         }
     ?>

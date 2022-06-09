@@ -1,25 +1,43 @@
 <?php
     include_once('../ptut_db_connexion.php');
 
-        $requeteCat = "SELECT * FROM categories";
-        $requeteProduit = "SELECT * FROM produits";
-
+    if(isset($_SESSION)){
+        session_start();
+    }
         try {
-            $queryCat = $db->query($requeteCat);
-            $queryProduit = $db->query($requeteProduit);
+            $categories = $db->query("SELECT * FROM categories");
+            $souscategories = $db->query("SELECT * FROM sous_categories");
 
-            $resultCat = $queryCat->fetchAll(PDO::FETCH_ASSOC);
-            $resultProduit = $queryProduit->fetchAll(PDO::FETCH_ASSOC);
-
-            if(isset($_POST['categorie']) != 0){
-                $requeteSousCat = "SELECT sous_categories.ID_SOUSCAT,NOM_SOUSCAT FROM cat_souscat JOIN sous_categories ON cat_souscat.ID_SOUSCAT = sous_categories.ID_SOUSCAT WHERE ID_CAT = '".$_POST['categorie']."' ";
-                $querySousCat = $db->query($requeteSousCat);
-                $resultSousCat = $querySousCat->fetchAll(PDO::FETCH_ASSOC);
-
-                $requeteArticle = "SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE  ID_SOUSCAT ='".$_POST['sous_categorie']."' ";
-                $queryArticle = $db->query($requeteArticle);
-                $resultArticle = $queryArticle->fetchAll(PDO::FETCH_ASSOC);
+            $queryArticle = $db->query("SELECT * FROM produits");
+            if(isset($_GET['EnPromotion']) && $_GET['categorie'] == 0){
+                $queryArticle = $db->prepare("SELECT * FROM produits WHERE EN_PROMOTION = ?");
+                $queryArticle->execute([$_GET['EnPromotion']]);
             }
+            if(isset($_GET['categorie']) && isset($_GET['EnPromotion']) && $_GET['categorie'] != 0){
+                $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE EN_PROMOTION = ? AND ID_CAT = ?");
+                $queryArticle->execute([$_GET['EnPromotion'],$_GET['categorie']]);
+            }
+            if(isset($_GET['categorie']) && $_GET['categorie'] != 0 && $_GET['EnPromotion'] == 0){
+                $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE ID_CAT = ? ");
+                $queryArticle->execute([$_GET['categorie']]);
+
+            }if(isset($_GET['categorie']) && isset($_GET['sous_categorie']) && $_GET['sous_categorie'] != 0) {
+                $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE ID_CAT = ? AND ID_SOUSCAT = ?");
+                $queryArticle->execute([$_GET['categorie'],$_GET['sous_categorie']]);
+            }
+            if(isset($_GET['categorie']) && isset($_GET['sous_categorie']) && isset($_GET['EnPromotion']) && $_GET['categorie'] != 0 && $_GET['sous_categorie'] != 0 && $_GET['EnPromotion'] != 0){
+                $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE EN_PROMOTION = ? AND ID_CAT = ? AND ID_SOUSCAT = ?");
+                $queryArticle->execute([$_GET['EnPromotion'],$_GET['categorie'],$_GET['sous_categorie']]);
+            }
+            if(isset($_GET['search'])&& $_GET['search'] != null){
+                $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT JOIN categories ON produit_cat.ID_CAT = categories.ID_CAT WHERE NOM_CAT LIKE ?;");
+                $queryArticle->execute(['%'. $_GET['search'].'%' ]);
+            }
+
+            $resultArticle = $queryArticle->fetchAll(PDO::FETCH_ASSOC);
+        
+            
+
         }catch(PDOException $e){
             echo $e->getMessage();
         }
