@@ -29,10 +29,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
 public class InterfaceGraphique extends javax.swing.JFrame {
-    private static final List<String> listeCat = getCategories();
+    private static List<String> listeCat = getCategories();
     private final ProduitTableModel modelTableProduit;
     private final ClientTableModel modelTableClient;
-    private static final Object verrou = new Object();
+    List<Produit> foundProducts;
+    private static int cpt=0;
             
     public InterfaceGraphique() throws IOException {
         ArrayList<Produit> listeProduits = getProduits();
@@ -55,6 +56,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         fillCbbCat(a_sc_cbb_cat);
         fillCbbCat(ms_sc_cbb_cat);
         fillCbbTxPromo(ams_cbb_tx_promo);
+        setDefaultIcon();
     }
     
 
@@ -108,9 +110,10 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ams_btn_effacer = new javax.swing.JButton();
         ams_lbl_lien_img = new javax.swing.JLabel();
         ams_lbl_img = new javax.swing.JLabel();
-        ams_cbb_img = new javax.swing.JComboBox<>();
         ams_scroll_img = new javax.swing.JScrollPane();
         ams_ta_lien_img = new javax.swing.JTextArea();
+        ams_btn_precedent = new javax.swing.JButton();
+        ams_btn_suivant = new javax.swing.JButton();
         onglet_categories = new javax.swing.JPanel();
         panel_c_ajout = new javax.swing.JPanel();
         a_c_lbl_nom_cat = new javax.swing.JLabel();
@@ -167,8 +170,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Gestion stock");
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(1050, 680));
-        setPreferredSize(new java.awt.Dimension(1050, 680));
+        setPreferredSize(new java.awt.Dimension(1060, 680));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -381,15 +383,6 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ams_lbl_img.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ams_lbl_img.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        ams_cbb_img.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "no_img_available.jpg" }));
-        ams_cbb_img.setMaximumSize(new java.awt.Dimension(145, 22));
-        ams_cbb_img.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ams_cbb_imgItemStateChanged(evt);
-            }
-        });
-        ams_cbb_img.setVisible(false);
-
         ams_ta_lien_img.setLineWrap(true);
         ams_ta_lien_img.setColumns(20);
         ams_ta_lien_img.setRows(5);
@@ -398,20 +391,34 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ams_ta_lien_img.setPreferredSize(new java.awt.Dimension(232, 44));
         ams_scroll_img.setViewportView(ams_ta_lien_img);
 
+        ams_btn_precedent.setText("Précédent");
+        ams_btn_precedent.setVisible(false);
+        ams_btn_precedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ams_btn_precedentActionPerformed(evt);
+            }
+        });
+
+        ams_btn_suivant.setText("Suivant");
+        ams_btn_suivant.setVisible(false);
+        ams_btn_suivant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ams_btn_suivantActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_p_ajout_modif_supprLayout = new javax.swing.GroupLayout(panel_p_ajout_modif_suppr);
         panel_p_ajout_modif_suppr.setLayout(panel_p_ajout_modif_supprLayout);
         panel_p_ajout_modif_supprLayout.setHorizontalGroup(
             panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
                 .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(ams_cbb_img, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ams_btn_ajouter_produit))
                     .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
-                        .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(6, 6, 6)
+                        .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
                                 .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
@@ -449,17 +456,22 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ams_tf_stock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
-                                .addComponent(ams_lbl_lien_img)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ams_scroll_img, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
                                 .addComponent(ams_p_lbl_categorie)
                                 .addGap(12, 12, 12)
                                 .addComponent(ams_cbb_categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ams_p_lbl_sous_cat)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ams_cbb_sous_cat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(ams_cbb_sous_cat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
+                                .addComponent(ams_lbl_lien_img)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ams_scroll_img, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
+                                        .addComponent(ams_btn_precedent)
+                                        .addGap(184, 184, 184)
+                                        .addComponent(ams_btn_suivant)))))
                         .addGap(0, 44, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,7 +497,8 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                             .addComponent(ams_btn_modifier_produit)
                             .addComponent(ams_btn_ajouter_produit)
                             .addComponent(ams_btn_effacer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ams_cbb_img, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ams_btn_precedent)
+                            .addComponent(ams_btn_suivant))
                         .addGap(15, 15, 15))
                     .addGroup(panel_p_ajout_modif_supprLayout.createSequentialGroup()
                         .addGroup(panel_p_ajout_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -627,11 +640,11 @@ public class InterfaceGraphique extends javax.swing.JFrame {
             panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_c_modif_supprLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ms_c_btn_supprimer_cat)
+                .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_c_modif_supprLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ms_c_lbl_categorie)
-                        .addComponent(ms_c_cbb_categorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ms_c_cbb_categorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ms_c_btn_supprimer_cat))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -647,6 +660,11 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         a_sc_lbl_nom_sous_cat.setText("Nom sous-catégorie");
 
         a_sc_btn_ajouter_sous_cat.setText("Ajouter");
+        a_sc_btn_ajouter_sous_cat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                a_sc_btn_ajouter_sous_catActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_sc_ajoutLayout = new javax.swing.GroupLayout(panel_sc_ajout);
         panel_sc_ajout.setLayout(panel_sc_ajoutLayout);
@@ -701,6 +719,11 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ms_sc_cbb_sous_cat.setPreferredSize(new java.awt.Dimension(60, 22));
 
         ms_sc_btn_supprimer_sous_cat.setText("Supprimer");
+        ms_sc_btn_supprimer_sous_cat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ms_sc_btn_supprimer_sous_catActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_sc_modif_supprLayout = new javax.swing.GroupLayout(panel_sc_modif_suppr);
         panel_sc_modif_suppr.setLayout(panel_sc_modif_supprLayout);
@@ -1098,7 +1121,20 @@ public class InterfaceGraphique extends javax.swing.JFrame {
  
     // Bouton supprimer categorie de l'onglet categories 
     private void ms_c_btn_supprimer_catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_c_btn_supprimer_catActionPerformed
-        // TODO add your handling code here:
+         int input = JOptionPane.showConfirmDialog(null, (
+                    "Vous souhaitez supprimer une categorie.\n" +
+                    "Attention, cette action est irréversible et supprimera les produits et sous categories associees"
+                ), "Gestion de stock - AEKI",JOptionPane.YES_NO_OPTION);
+        if (input == JOptionPane.YES_OPTION) {    
+            List<Produit> productsToDelete = new ArrayList<>();
+            productsToDelete = deleteCategorie((String) ms_c_cbb_categorie.getSelectedItem());
+
+            r_cbb_categorie.removeItem(ms_c_cbb_categorie.getSelectedItem());
+            ams_cbb_categorie.removeItem(ms_c_cbb_categorie.getSelectedItem());
+            a_sc_cbb_cat.removeItem(ms_c_cbb_categorie.getSelectedItem());
+            ms_sc_cbb_cat.removeItem(ms_c_cbb_categorie.getSelectedItem());
+            ms_c_cbb_categorie.removeItem(ms_c_cbb_categorie.getSelectedItem());
+        }
     }//GEN-LAST:event_ms_c_btn_supprimer_catActionPerformed
    
     // Remplir cbb sous categorie recherche en fonction categorie selectionnee
@@ -1123,7 +1159,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ams_cbb_categorieItemStateChanged
 
-    
+    // Remplir cbb sous categorie modifier supprimer en fonction categorie selectionnee
     private void ms_sc_cbb_catItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ms_sc_cbb_catItemStateChanged
         ms_sc_cbb_sous_cat.removeAllItems();
         String s = ms_sc_cbb_cat.getSelectedItem().toString();
@@ -1142,7 +1178,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
     // Methode pour reinitialiser les champs du panel produit ajouter modifier supprimer
      private void ams_effacer_champs() {                                                
-         String lien_img = ams_cbb_img.getSelectedItem().toString();
+         r_cbb_categorie.setSelectedIndex(0);         
          ams_tf_id_produit.setText("");
          ams_cbb_categorie.setSelectedIndex(0);
          ams_cbb_categorie.setEnabled(true);
@@ -1159,10 +1195,9 @@ public class InterfaceGraphique extends javax.swing.JFrame {
          ams_tf_prix_reduit.setText("0");
          ams_tf_stock.setText("");
          ams_ta_lien_img.setText("");
-         if(!lien_img.equals("no_img_available.jpg")) {
-             ams_cbb_img.removeItem(lien_img);
-         }
-         ams_cbb_img.setSelectedItem("no_img_available.jpg");
+         setDefaultIcon();
+         ams_btn_suivant.setVisible(false);
+         ams_btn_precedent.setVisible(false);
          
     }                                               
     
@@ -1217,7 +1252,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         if(!ams_tf_id_produit.getText().equals("")) {
             JOptionPane.showMessageDialog(null, ("""
                                                  Le produit ne peut \u00eatre ajout\u00e9, l'id produit existe d\u00e9j\u00e0.
-                                                 Cliquez sur effacer avant de remplir les champs d'un nouveau produit."""), "Ajout de produit", JOptionPane.INFORMATION_MESSAGE);
+                                                 Cliquez sur effacer avant de remplir les champs d'un nouveau produit."""), "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if((ams_tf_nom_produit.getText().equals("")) || (ams_tf_prix.getText().equals("")) || (ams_tf_stock.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, ("""
@@ -1254,7 +1289,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     ajout = createProduit(p, nom_cat, nom_souscat);
                 }
                 if (ajout == true) {
-                    JOptionPane.showMessageDialog(null, "Le produit a été ajouté avec succès", "Ajout de produit", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Le produit a été ajouté avec succès", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
                     ams_effacer_champs();
                     int id_produit_max = getIdProduit(nom_produit);
                     Produit pAdd = new Produit(id_produit_max, nom_produit, description, prix, en_promotion, promo, prix_reduit, stock, nom_cat, nom_souscat );
@@ -1268,46 +1303,56 @@ public class InterfaceGraphique extends javax.swing.JFrame {
 
     // Action sur le bouton rechercher du panel produits
     private void r_btn_rechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_btn_rechercherActionPerformed
-        if(r_tf_nom_produit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Veuillez saisir un nom de produit", "Recherche de produit", JOptionPane.INFORMATION_MESSAGE);
+        ams_btn_suivant.setVisible(false);
+        ams_btn_precedent.setVisible(false);
+        foundProducts = searchProduits(r_tf_nom_produit.getText() , (String) r_cbb_categorie.getSelectedItem(), (String) r_cbb_sous_cat.getSelectedItem());
+           
+        cpt = 0;
+        if(foundProducts.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Il n'existe pas de produit correspondant à votre recherche", "Gestion de stock - AEKI", JOptionPane.ERROR_MESSAGE);
+        } else if(foundProducts.size() == 1){
+            afficherRechercheProduit(cpt);
         } else {
-            Produit foundProduct = searchProduit(r_tf_nom_produit.getText() , (String) r_cbb_categorie.getSelectedItem(), (String) r_cbb_sous_cat.getSelectedItem());
-            if(foundProduct == null) {
-                JOptionPane.showMessageDialog(null, "Il n'existe pas de produit correspondant au nom indique", "Gestion de stock - AEKI", JOptionPane.ERROR_MESSAGE);
-            } else {
-               ams_cbb_categorie.setSelectedIndex(r_cbb_categorie.getSelectedIndex());
-               ams_cbb_categorie.setEnabled(false);
-               ams_cbb_sous_cat.setSelectedIndex(r_cbb_sous_cat.getSelectedIndex());
-               ams_cbb_sous_cat.setEnabled(false);
-               ams_tf_id_produit.setText(Integer.toString(foundProduct.getIdProduit()));
-               ams_tf_nom_produit.setText(foundProduct.getNomProduit());
-               ams_ta_description.setText(foundProduct.getDescription());
-               ams_tf_prix.setText(Double.toString(foundProduct.getPrix()));
-               if(foundProduct.getEnPromo()) {
-                   ams_ckb_en_promotion.setSelected(true);
-                   ams_cbb_tx_promo.setEnabled(true);
-                   ams_cbb_tx_promo.setBackground(new java.awt.Color(255, 255, 255));
-               } else {
-                   ams_ckb_en_promotion.setSelected(false);
-               }
-               ams_cbb_tx_promo.setSelectedIndex(foundProduct.getTx_promo());
-               ams_tf_prix_reduit.setText(Double.toString(foundProduct.getPrixReduit()));
-               ams_tf_stock.setText(Integer.toString(foundProduct.getStock()));
-               ams_ta_lien_img.setText(foundProduct.getImg());
-               if(!foundProduct.getImg().equals("")) {
-                   ams_cbb_img.addItem(foundProduct.getImg());
-                   ams_cbb_img.setSelectedIndex(1);
-               }
-               ams_cbb_tx_promo.setSelectedItem(foundProduct.getTx_promo());               
-            }
-
+            afficherRechercheProduit(cpt);
+            ams_btn_suivant.setVisible(true);
         }
     }//GEN-LAST:event_r_btn_rechercherActionPerformed
-
+    
+    // Methode pour afficher un produit dans l'onglet produit suite a recherche
+    private void afficherRechercheProduit(int i) {
+        ams_cbb_categorie.setSelectedIndex(r_cbb_categorie.getSelectedIndex());
+        ams_cbb_categorie.setEnabled(false);
+        ams_cbb_sous_cat.setSelectedIndex(r_cbb_sous_cat.getSelectedIndex());
+        ams_cbb_sous_cat.setEnabled(false);
+        ams_tf_id_produit.setText(Integer.toString(foundProducts.get(i).getIdProduit()));
+        ams_tf_nom_produit.setText(foundProducts.get(i).getNomProduit());
+        ams_ta_description.setText(foundProducts.get(i).getDescription());
+        ams_tf_prix.setText(Double.toString(foundProducts.get(i).getPrix()));
+        if(foundProducts.get(i).getEnPromo()) {
+            ams_ckb_en_promotion.setSelected(true);
+            ams_cbb_tx_promo.setEnabled(true);
+            ams_cbb_tx_promo.setBackground(new java.awt.Color(255, 255, 255));
+        } else {
+            ams_ckb_en_promotion.setSelected(false);
+        }
+        ams_cbb_tx_promo.setSelectedIndex(foundProducts.get(i).getTx_promo());
+        ams_tf_prix_reduit.setText(Double.toString(foundProducts.get(i).getPrixReduit()));
+        ams_tf_stock.setText(Integer.toString(foundProducts.get(i).getStock()));
+        ams_ta_lien_img.setText(foundProducts.get(i).getImg());
+        if(!foundProducts.get(i).getImg().equals("")) {
+            setImg(foundProducts.get(i).getImg());
+        } else {
+            setDefaultIcon();
+        }
+        ams_cbb_tx_promo.setSelectedItem(foundProducts.get(i).getTx_promo());       
+    }
+    
+    
+    
     // Action sur le bouton supprimer du panel produits
     private void ams_btn_supprimer_produitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ams_btn_supprimer_produitActionPerformed
         if(ams_tf_id_produit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Recherchez un produit pour pouvoir le supprimer", "Suppression de produit", JOptionPane.INFORMATION_MESSAGE);   
+            JOptionPane.showMessageDialog(null, "Recherchez un produit pour pouvoir le supprimer", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);   
         } else {
             int input = JOptionPane.showConfirmDialog(null, (
                     """
@@ -1330,7 +1375,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     i++;
                 }
                 modelTableProduit.removeRow(i);
-                JOptionPane.showMessageDialog(null, "Le produit a été supprimé avec succès", "Suppression de produit", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Le produit a été supprimé avec succès", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
                 ams_effacer_champs();
                 r_tf_nom_produit.setText("");
             }
@@ -1341,7 +1386,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private void ams_btn_modifier_produitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ams_btn_modifier_produitActionPerformed
         boolean update = false;
         if(ams_tf_id_produit.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Recherchez un produit pour pouvoir le modifier", "Modification de produit", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Recherchez un produit pour pouvoir le modifier", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if((ams_tf_nom_produit.getText().equals("")) || (ams_tf_prix.getText().equals("")) || (ams_tf_stock.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, ("""
@@ -1379,7 +1424,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     update = updateProduit(p);
                 }
                 if (update == true) {
-                    JOptionPane.showMessageDialog(null, "Le produit a été modifié avec succès", "Modification de produit", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Le produit a été modifié avec succès", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
                     int i = 0;
                     while(!ams_tf_nom_produit.getText().equals((String)modelTableProduit.getValueAt(i, 1))){
                         i++;
@@ -1428,28 +1473,24 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         ams_tf_prix_reduit.setText(Double.toString(prixReduit));
     }//GEN-LAST:event_ams_cbb_tx_promoActionPerformed
 
-     // Action sur la combobox img du panel produits
-    private void ams_cbb_imgItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ams_cbb_imgItemStateChanged
-        String lien_img = ams_cbb_img.getSelectedItem().toString();
-        if (!lien_img.equals("no_img_available.jpg")) {
-            setImg(lien_img);
-        } else {
-            ImageIcon icon = new ImageIcon("src\\gestioncatalogue\\img\\no_img_available.jpg");
-            Image iconImage = icon.getImage(); // transform it
-            Image newImage = iconImage.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-            icon = new ImageIcon(newImage);  // transform it back
-            ams_lbl_img.setIcon(icon);
-        }
-    }//GEN-LAST:event_ams_cbb_imgItemStateChanged
-    
+   
+    // Conversion des liens en icone
     private void setImg(String lien_img) {
         try{
             ImageIcon icon = new ImageIcon(new ImageIcon(new URL(lien_img)).getImage().getScaledInstance(233,233,Image.SCALE_DEFAULT));
             ams_lbl_img.setIcon(icon);
         } catch(MalformedURLException e) {
-            JOptionPane.showMessageDialog(null, "L'URL de l'image n'est pas valide", "Image du produit", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "L'URL de l'image n'est pas valide", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("****** Pb URL");
         }
+    }
+    
+    private void setDefaultIcon() {
+        ImageIcon icon = new ImageIcon("src\\gestioncatalogue\\img\\no_img_available.jpg");
+        Image iconImage = icon.getImage(); // transform it
+        Image newImage = iconImage.getScaledInstance(233, 233,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        icon = new ImageIcon(newImage);  // transform it back
+        ams_lbl_img.setIcon(icon);
     }
     
      // Placement de la JFrame au centre de l ecran
@@ -1470,6 +1511,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         this.setResizable(false);
     }//GEN-LAST:event_formWindowActivated
 
+    // Action du bouton ajouter client
     private void btn_ajouter_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajouter_clientActionPerformed
         boolean ajout = false;
         if((tf_nom_client.getText().equals("")) || (tf_mdp_client.getText().equals("")) || (tf_email_client.getText().equals(""))) {
@@ -1494,7 +1536,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     ajout = createClient(c);
                 }
                 if (ajout == true) {
-                    JOptionPane.showMessageDialog(null, "Le client a été ajouté avec succès", "Ajout de client", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Le client a été ajouté avec succès", "Gestion des clients - AEKI", JOptionPane.INFORMATION_MESSAGE);
                     int id_client_max = getIdClient(email);
                     Client cAdd = new Client(id_client_max, nom_client, mot_de_passe, email);
                     client_effacer_champs();    
@@ -1502,7 +1544,8 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_btn_ajouter_clientActionPerformed
-
+    
+    // Action du bouton modifier client
     private void btn_modifier_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modifier_clientActionPerformed
         int i = jt_client.getSelectedRow();
         modelTableClient.setValueAt(tf_nom_client.getText(), i, 1);
@@ -1518,6 +1561,7 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         client_effacer_champs();
     }//GEN-LAST:event_btn_modifier_clientActionPerformed
 
+    // Action du bouton supprimer client
     private void btn_supprimer_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_supprimer_clientActionPerformed
         int i = jt_client.getSelectedRow();
         
@@ -1526,7 +1570,8 @@ public class InterfaceGraphique extends javax.swing.JFrame {
         modelTableClient.removeRow(i);
         client_effacer_champs();
     }//GEN-LAST:event_btn_supprimer_clientActionPerformed
-
+    
+    // Action du bouton ajouter categorie
     private void a_c_btn_ajouter_catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a_c_btn_ajouter_catActionPerformed
          boolean ajout = false;
         if(a_c_tf_nom_cat.getText().equals("")) {
@@ -1544,12 +1589,51 @@ public class InterfaceGraphique extends javax.swing.JFrame {
                     ajout = addCategorie(nom_cat);
                 }
                 if (ajout == true) {
-                    JOptionPane.showMessageDialog(null, "La categorie a été ajouté avec succès", "Ajout de categorie", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "La categorie a été ajouté avec succès", "Gestion de stock - AEKI", JOptionPane.INFORMATION_MESSAGE);
+                    r_cbb_categorie.addItem((String) a_c_tf_nom_cat.getText());
+                    ams_cbb_categorie.addItem(a_c_tf_nom_cat.getText());
+                    ms_c_cbb_categorie.addItem(a_c_tf_nom_cat.getText());
+                    a_sc_cbb_cat.addItem(a_c_tf_nom_cat.getText());
+                    ms_sc_cbb_cat.addItem(a_c_tf_nom_cat.getText());
                     a_c_tf_nom_cat.setText("");
                 }
             }
     }//GEN-LAST:event_a_c_btn_ajouter_catActionPerformed
 
+    // Action du bouton suivant suite a recherche
+    private void ams_btn_suivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ams_btn_suivantActionPerformed
+        ams_btn_precedent.setVisible(true);        
+        cpt++;
+        
+        if(cpt+1 == foundProducts.size()) {
+            ams_btn_suivant.setVisible(false);
+        }
+        
+         afficherRechercheProduit(cpt);
+
+    }//GEN-LAST:event_ams_btn_suivantActionPerformed
+
+    // Action du bouton precedent suite a recherche
+    private void ams_btn_precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ams_btn_precedentActionPerformed
+        ams_btn_suivant.setVisible(true);
+        cpt--;
+
+        if(cpt == 0) {
+            ams_btn_precedent.setVisible(false);
+        }
+        
+        afficherRechercheProduit(cpt);
+    }//GEN-LAST:event_ams_btn_precedentActionPerformed
+
+    private void a_sc_btn_ajouter_sous_catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a_sc_btn_ajouter_sous_catActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_a_sc_btn_ajouter_sous_catActionPerformed
+
+    private void ms_sc_btn_supprimer_sous_catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ms_sc_btn_supprimer_sous_catActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ms_sc_btn_supprimer_sous_catActionPerformed
+
+    // Methode pour effacer les champs client
     private void client_effacer_champs() {                                                
          tf_nom_client.setText("");
          tf_mdp_client.setText("");
@@ -1574,9 +1658,10 @@ public class InterfaceGraphique extends javax.swing.JFrame {
     private javax.swing.JButton ams_btn_ajouter_produit;
     private javax.swing.JButton ams_btn_effacer;
     private javax.swing.JButton ams_btn_modifier_produit;
+    private javax.swing.JButton ams_btn_precedent;
+    private javax.swing.JButton ams_btn_suivant;
     private javax.swing.JButton ams_btn_supprimer_produit;
     private javax.swing.JComboBox<String> ams_cbb_categorie;
-    private javax.swing.JComboBox<String> ams_cbb_img;
     private javax.swing.JComboBox<String> ams_cbb_sous_cat;
     private javax.swing.JComboBox<String> ams_cbb_tx_promo;
     private javax.swing.JCheckBox ams_ckb_en_promotion;
