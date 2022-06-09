@@ -8,3 +8,10 @@
 
     $firstTrend = $queryTrend1->fetchAll(PDO::FETCH_ASSOC);
     $trend = $queryTrend2->fetchAll(PDO::FETCH_ASSOC);
+
+    $queryCatMonth = $db->prepare("SELECT * FROM produits JOIN produit_cat ON produits.ID_PRODUIT = produit_cat.ID_PRODUIT JOIN categories ON produit_cat.ID_CAT = categories.ID_CAT GROUP BY NOM_CAT LIMIT 3");
+    $queryCatMonth->execute();
+
+    $catMonth = $queryCatMonth->fetchAll(PDO::FETCH_ASSOC);
+
+?>

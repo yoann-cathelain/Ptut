@@ -34,6 +34,10 @@ body, ul, li, p, a, label, input, div {
   font-size: 18px !important;
   font-weight: 300 !important;
 }
+.promotion {
+  padding-left: 10px;
+  margin-top: 5px;
+}
 .h1 {
   font-family: 'Roboto', sans-serif;
   font-size: 48px !important;
@@ -80,6 +84,10 @@ body, ul, li, p, a, label, input, div {
 .templatemo-accordion a { color: #000;}
 .templatemo-accordion a:hover { color: #333d4a;}
 /* Shop */
+.produit-promotion {
+  font-weight: 5px bold;
+  color: red;
+}
 .shop-top-menu a:hover { color: #69bb7e !important;}
 /* Product */
 .product-wap { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);}
@@ -136,9 +144,8 @@ body, ul, li, p, a, label, input, div {
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
 .form-control { border: 1px solid #e8e8e8;}
+
 /*Connexion Client*/
-
-
 /*******************************/
 /*          Buttons            */
 /*******************************/

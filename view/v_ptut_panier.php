@@ -13,6 +13,7 @@
         include '../function/fonction_panier.php';
         include '../controller/c_ptut_panier.php';
         include('../view/v_ptut_navbar.php');
+        $user = $_SESSION['username'];
 ?>
 <div class="container">
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -37,7 +38,7 @@
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
                             <?php
-                                if(isset($Articles) && $nbArticles > 0){
+                                if(isset($Articles) && $nbArticles > 0 && isset($_GET['user'])){
                                     foreach($Articles as $Article){
                                         ?>
                                         <tr>
@@ -53,9 +54,9 @@
                                             <p class="small"><?=$Article['DESCRIPTION']?></p>
     
                                             <div class="m-t-sm">
-                                                <a href="../view/v_ptut_panier.php?id_produit=<?=$Article['ID_PRODUIT']?>" class="text-muted"><i class="fa fa-gift"></i> Ajouter un produit</a>
+                                                <a href="../view/v_ptut_panier.php?id_produit=<?=$Article['ID_PRODUIT']?>&user=<?=$user?>" class="text-muted"><i class="fa fa-gift"></i> Ajouter un produit</a>
                                                 |
-                                                <a href="../view/v_ptut_panier.php?action=supprimer&id=<?=$Article['ID_PRODUIT']?>" class="text-muted"><i class="fa fa-trash"></i> Supprimer le produit</a>
+                                                <a href="../view/v_ptut_panier.php?action=supprimer&id=<?=$Article['ID_PRODUIT']?>&user=<?=$user?>" class="text-muted"><i class="fa fa-trash"></i> Supprimer le produit</a>
                                             </div>
                                         </td>
     
@@ -63,8 +64,10 @@
                                             <?php
                                                 if($Article['EN_PROMOTION'] == 1){
                                                     $prixReduit = $Article['PRIX_REDUIT']*$Article['QUANTITE_PRODUIT'];
+                                                    $prix = $Article['PRIX']*$Article['QUANTITE_PRODUIT'];
                                                     ?>
                                                     <?=$prixReduit?>€
+                                                    <s class="text-muted"><?=$prix?>€</s>
                                                     <?php
                                                 }else {
                                                     $prix = $Article['PRIX']*$Article['QUANTITE_PRODUIT'];
@@ -80,11 +83,13 @@
                                         <td>
                                             <h4>
                                                 <?php
-                                                    if(isset($prixReduit)){
+                                                    if($Article['EN_PROMOTION'] == 1){
+                                                        $prixReduit = $Article['PRIX_REDUIT']*$Article['QUANTITE_PRODUIT'];
                                                         ?>
                                                         <?=$prixReduit?>€
                                                         <?php
                                                     }else {
+                                                        $prix = $Article['PRIX']*$Article['QUANTITE_PRODUIT'];
                                                         ?>
                                                         <?=$prix?>€
                                                         <?php
@@ -107,7 +112,18 @@
                 </div>
                
                 <div class="ibox-content">
-                    <a href="#" class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</a>
+                    <?php
+                        if(empty($_SESSION['username'])){
+                            ?>
+                            <a href="../view/v_ptut_connexion.php" class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</a>
+                            <?php
+                        }else {
+                            ?>
+                            <a href="../view/v_ptut_connexion.php" class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</a>
+                            <?php
+                        }
+                        ?>
+
                     <a href="../view/v_ptut_catalogue.php" class="btn btn-white"><i class="fa fa-arrow-left"></i> Continue shopping</a>
 
                 </div>

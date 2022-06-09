@@ -26,7 +26,9 @@
 <body>
     <?php
         include_once('../controller/c_ptut_produits.php');
-        include_once('../view/v_ptut_navbar.php');
+        include('../view/v_ptut_navbar.php');
+        $quantity = 1;
+        $user = $_SESSION['username'];
     ?>
 
 
@@ -116,13 +118,26 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 class="h2"><?=$produits[0]['NOM_PRODUIT']?></h1>
-                            <p class="h3 py-2"><?=$produits[0]['PRIX']?>€</p>
+                            <?php
+                            if(isset($produits[0]['EN_PROMOTION'])){
+                                if($produits[0]['EN_PROMOTION'] == 1){
+                                    ?>
+                                    <p class="h3 py-2"><label class="text-muted"><?=$produits[0]['PRIX']?></label> <?=$produits[0]['PRIX_REDUIT']?>€</p>
+                                    <label class="produit-promotion">En promotion de <?=$produits[0]['PROMO']?>%</label>
+                                    <?php
+                                }else {
+                                    ?>
+                                    <p class="h3 py-2"><?=$produits[0]['PRIX']?>€</p>
+                                    <?php
+                                }
+                            }
+                            ?>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6>Marque:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Aeki</strong></p>
+                                    <p><strong>Aeki</strong></p>
                                 </li>
                             </ul>
 
@@ -136,9 +151,9 @@
                                     <p class="text-muted"><strong>White / Black</strong></p>
                                 </li>
                             </ul>
-                            <!--<a href="../view/v_ptut_panier.php?id_produit=<?=$produits[0]['ID_PRODUIT']?>">commander</a>-->
                             <form action="../view/v_ptut_panier.php" method="GET">
                                 <input type="hidden" name="id_produit" value="<?=$produits[0]['ID_PRODUIT']?>">
+                                <input type="hidden" name="user" value="<?=$user?>">
                                 <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
@@ -146,7 +161,7 @@
                                                 Quantity
                                             </li>
                                             <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value"><?=$quantity?></span></li>
                                             <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                         </ul>
                                     </div>
@@ -160,7 +175,6 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@
 <body>
     <?php
         include_once('v_ptut_navbar.php');
+        include('../controller/c_ptut_contact.php');
     ?>
 
 
@@ -57,7 +58,7 @@
     <!-- Start Contact -->
     <div class="container py-5">
         <div class="row py-5">
-            <form class="col-md-9 m-auto" method="post" role="form">
+            <form class="col-md-9 m-auto" method="post" role="form" action="../view/v_ptut_contact.php">
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="inputname">Nom</label>

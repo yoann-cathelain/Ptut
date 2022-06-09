@@ -1,4 +1,4 @@
-        <!-- Start Footer -->
+<!-- Start Footer -->
         <footer class="bg-dark" id="tempaltemo_footer">
             <div class="container">
                 <div class="row">
@@ -24,18 +24,15 @@
                     <div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                         <ul class="list-unstyled text-light footer-link-list">
-                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                            <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
-                            <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
-                            <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
-                            <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
-                            <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
-                            <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                            <li><a class="text-decoration-none" href="../view/v_ptut_catalogue.php?categorie=1">Chaise</a></li>
+                            <li><a class="text-decoration-none" href="../view/v_ptut_catalogue.php?categorie=2">Lits</a></li>
+                            <li><a class="text-decoration-none" href="../view/v_ptut_catalogue.php?categorie=3">Rangement</a></li>
+                            <li><a class="text-decoration-none" href="../view/v_ptut_catalogue.php?categorie=4">Table</a></li>
                         </ul>
                     </div>
 
                     <div class="col-md-4 pt-5">
-                        <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                        <h2 class="h2 text-light border-bottom pb-3 border-light">Informations complémentaires</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Accueil</a></li>
                             <li><a class="text-decoration-none" href="#">A propos</a></li>

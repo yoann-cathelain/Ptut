@@ -1,2 +1,2 @@
 <?php
-    include('../view/v_ptut_navbar.php');
+    include('../models/m_ptut_navbar.php');

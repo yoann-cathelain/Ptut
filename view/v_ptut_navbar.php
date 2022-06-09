@@ -1,5 +1,7 @@
 <?php
+
     session_start();
+
 ?>    
     <link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/aeki_favicon.png">
@@ -75,7 +77,17 @@
                     <a class="nav-icon d-none d-lg-inline" href="" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="../view/v_ptut_panier.php">
+                    <?php
+                    if(isset($_SESSION['username'])){
+                        ?>
+                        <a class="nav-icon position-relative text-decoration-none" href="../view/v_ptut_panier.php?user=<?=$_SESSION['username']?>">
+                        <?php
+                    }else {
+                        ?>
+                        <a class="nav-icon position-relative text-decoration-none" href="../view/v_ptut_panier.php">
+                        <?php
+                    }
+                    ?>
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <?php
                             if(!empty($nbArticles)){
@@ -125,6 +137,7 @@
 
         </div>
     </nav>
+    
     <!-- Close Header -->
     <!-- Modal -->
         <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -132,7 +145,7 @@
             <div class="w-100 pt-1 mb-5 text-right">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <form action="../view/v_ptut_catalogue.php" method="get" class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" id="inputModalSearch" name="search" placeholder="Search ...">
                     <button type="submit" class="input-group-text bg-success text-light">
@@ -142,4 +155,6 @@
             </form>
         </div>
     </div>
+
+
 
