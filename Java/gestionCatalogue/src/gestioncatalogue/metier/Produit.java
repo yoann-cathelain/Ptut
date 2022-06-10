@@ -13,7 +13,9 @@ public class Produit implements Comparable<Produit>{
     private double prix_reduit;
     private int stock;
     private String img;
+    private int id_cat;
     private String nom_cat;
+    private int id_sousCat;
     private String nom_sousCat;
 
     
@@ -120,6 +122,12 @@ public class Produit implements Comparable<Produit>{
         this.nom_cat = nom_cat;
         this.nom_sousCat = nom_sousCat;
     }
+    
+    public Produit (int id_produit, int id_cat, int id_sousCat) {
+        this.id_produit = id_produit;
+        this.id_cat = id_cat;
+        this.id_sousCat = id_sousCat;        
+    }
    
     // Getters and setters
     public int getIdProduit() { return id_produit; }
@@ -151,8 +159,14 @@ public class Produit implements Comparable<Produit>{
     public String getImg() { return img; }
     public void setImg(String img) { this.img = img; }    
 
+    public int getIdCat() { return id_cat; }
+    public void setIdCat(int id_cat) { this.id_cat = id_cat; }
+    
     public String getCat() { return nom_cat; }
     public void setCat(String nom_cat) { this.nom_cat = nom_cat; }
+    
+    public int getIdSousCat() { return id_sousCat; }
+    public void setIdSousCat(int id_sousCat) { this.id_sousCat = id_sousCat; }
 
     public String getSousCat() { return nom_sousCat; }
     public void setSousCat(String nom_sousCat) { this.nom_sousCat = nom_sousCat; }

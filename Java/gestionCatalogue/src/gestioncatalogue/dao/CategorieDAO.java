@@ -2,6 +2,8 @@ package gestioncatalogue.dao;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import static gestioncatalogue.dao.ProduitDAO.deleteProduit;
+import gestioncatalogue.metier.Produit;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,6 +110,74 @@ public class CategorieDAO {
                 }
             return true;
         }
+    /*
+    public static boolean addSousCategorie(String nom_cat, String nom_sousCat) {
+        
+    }*/
     
+    public static List<Produit> deleteCategorie(String nom_cat) {
+        List<Produit> searchProducts = new ArrayList<>();
+        Produit searchProduct = null;
+        
+        String sql1 = "select id_produit, id_cat, id_souscat from produits NATURAL JOIN produit_cat NATURAL JOIN categories NATURAL JOIN sous_categories WHERE NOM_CAT = ?";
+            try{
+                PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql1);
+                pst.setString(1, nom_cat);
+                
+                ResultSet rs = pst.executeQuery();         
+                while(rs.next()) {
+                    int id_produit = rs.getInt("ID_PRODUIT");
+                    int id_cat = rs.getInt("ID_CAT");
+                    int id_sousCat = rs.getInt("ID_SOUSCAT");
+                    searchProduct = new Produit(id_produit, id_cat, id_sousCat);
+                    searchProducts.add(searchProduct);
+                }
+            } catch (SQLException e) { System.out.println(e); }
+            
+            for (Produit p : searchProducts) {
+                deleteProduit(p.getIdProduit());
+            }
+            
+            String sql2 = "delete from cat_souscat where id_cat=?";
+            for(Produit p : searchProducts) {
+                try{
+                    PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql2);
+                    pst.setInt(1, p.getIdCat());
+                    pst.execute();
+                } catch (SQLException e) { System.out.println(e); }
+            }
+  
+            String sql3 = "delete from sous_categories where id_souscat=?";
+            for(Produit p : searchProducts) { 
+                try{
+                    PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql3);
+                    pst.setInt(1, p.getIdSousCat());
+                    pst.execute();
+                } catch (SQLException e) { System.out.println(e); }
+           }
+           
+            String sql4 = "delete from categories where id_cat=?";
+            for(Produit p : searchProducts) {
+                try{
+                    PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql4);
+                    pst.setInt(1, p.getIdCat());
+                    pst.execute();
+                } catch (SQLException e) { System.out.println(e); }
+            }
+            
+            String sql5 = "delete from categories where nom_cat=?";
+            try{
+                    PreparedStatement pst = (PreparedStatement) connection.prepareStatement(sql5);
+                    pst.setString(1, nom_cat);
+                    pst.execute();
+                } catch (SQLException e) { System.out.println(e); }
+            
+            return searchProducts;
+    }
+   /* 
+        public static List<Produit> deleteSousCategorie(String nom_sousCat) {
+            List<Produit> searchProducts = new ArrayList<>();
+    }
+    */
         
 }
