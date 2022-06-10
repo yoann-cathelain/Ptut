@@ -5,11 +5,11 @@
         $verifPanier->execute([$id_client]);
 
         $verif = $verifPanier->fetchAll(PDO::FETCH_ASSOC);
-        $exist = count($verif);
-        if($exist == 0){
+        $exist = $verif[0]['client'];
+        if($exist < 1){
             $insertPanier = $pdodb->prepare("INSERT INTO panier (ID_CLIENT) VALUES (?)");
             $insertPanier->execute([$id_client]);
-        }else {}
+        }
 
     }
     function ajoutArticle($pdodb,$id_panier,$id_produit,$quantite_produit){

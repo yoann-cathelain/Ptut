@@ -1,7 +1,7 @@
 <?php
     include_once('../models/m_ptut_panier.php');
-
-    if(isset($_GET['id_produit']) && isset($_GET['user'])){
+    if(isset($panier[0]['ID_PANIER'])){
+        if(isset($_GET['id_produit']) && isset($_GET['user'])){
             ajoutArticle($db,$panier[0]['ID_PANIER'],$_GET['id_produit'],1);
             header('Location: ../view/v_ptut_panier.php?user='.$_GET['user']);
 
@@ -20,5 +20,6 @@
         $nbArticles = 0;
     }
 
+    }
 
     
