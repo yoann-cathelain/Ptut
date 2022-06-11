@@ -17,7 +17,7 @@
                 $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE EN_PROMOTION = ? AND ID_CAT = ?");
                 $queryArticle->execute([$_GET['EnPromotion'],$_GET['categorie']]);
             }
-            if(isset($_GET['categorie']) && $_GET['categorie'] != 0 && $_GET['EnPromotion'] == 0){
+            if(isset($_GET['categorie']) && $_GET['categorie'] != 0){
                 $queryArticle = $db->prepare("SELECT * FROM produit_cat JOIN produits ON produit_cat.ID_PRODUIT = produits.ID_PRODUIT WHERE ID_CAT = ? ");
                 $queryArticle->execute([$_GET['categorie']]);
 
